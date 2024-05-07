@@ -32,7 +32,7 @@ import tienda.repositorios.ProductoRepository;
 import tienda.repositorios.VentaRepository;
 
 @SpringBootApplication
-public class FacturacionSegundaEntrega_DiazFrancoLuciano implements CommandLineRunner {
+public class FacturacionEntregaProyectoFinal_DiazFrancoLuciano implements CommandLineRunner {
 
    @Autowired
    private ClienteRepository clienteRepository; // llamo al repositorio asi utilizamos todos sus metodos
@@ -47,7 +47,7 @@ public class FacturacionSegundaEntrega_DiazFrancoLuciano implements CommandLineR
    private ComprobanteRepository comprobanteRepository;// llamo al repositorio asi utilizamos todos sus metodos
    
    public static void main(String[] args) {
-      SpringApplication.run(FacturacionSegundaEntrega_DiazFrancoLuciano.class, args);
+      SpringApplication.run(FacturacionEntregaProyectoFinal_DiazFrancoLuciano.class, args);
    }
 
    @Override
@@ -565,21 +565,21 @@ public class FacturacionSegundaEntrega_DiazFrancoLuciano implements CommandLineR
       System.out.println("¿Desea generar un comprobante de venta? (S)i / (N)o");
       String respuesta = scanner.next().toUpperCase();
       if (respuesta.equals("S")) {
-          // Generar y guardar el comprobante en la tabla correspondiente
-          Comprobante comprobante = new Comprobante();
-          comprobante.setVenta(venta); // Asignar la venta al comprobante
-          comprobante.setFechaComprobante(LocalDateTime.now()); // Asignar la fecha actual al comprobante
-          comprobante.setDescripcion("Comprobante de venta para la venta ID: " + venta.getId_venta()); // Asignar una descripción al comprobante
-          
-          // Guardar el comprobante en la tabla comprobante usando el servicio correspondiente
-          comprobante.setIdComprobante(comprobante);
-          
-          System.out.println("Comprobante de venta generado exitosamente.");
-      } else {
-          // Si el usuario elige no generar el comprobante, no se imprime nada
-          System.out.println("Comprobante de venta no generado.");
-      }
-   
+    	    // Generar y guardar el comprobante en la tabla correspondiente
+    	    Comprobante comprobante = new Comprobante();
+    	    comprobante.setVenta(venta); // Asignar la venta al comprobante
+    	    comprobante.setFechaComprobante(LocalDateTime.now()); // Asignar la fecha actual al comprobante
+    	    comprobante.setDescripcion("Comprobante de venta para la venta ID: " + venta.getId_venta()); // Asignar una descripción al comprobante
+
+    	    // Guardar el comprobante en la base de datos y obtener el comprobante con el ID generado
+    	    Comprobante comprobanteGuardado = comprobanteRepository.save(comprobante);
+
+    	    // Imprimir el ID del comprobante generado
+    	    System.out.println("Comprobante de venta generado exitosamente. ID del comprobante: " + comprobanteGuardado.getIdComprobante());
+    	} else {
+    	    // Si el usuario elige no generar el comprobante, no se imprime nada
+    	    System.out.println("Comprobante de venta no generado.");
+    	}
    }
 
   

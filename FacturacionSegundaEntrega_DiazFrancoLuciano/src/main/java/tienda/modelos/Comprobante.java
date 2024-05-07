@@ -20,7 +20,7 @@ public class Comprobante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_COMPROBANTE")
-    private Comprobante idComprobante;
+    private Long idComprobante;
 
     @Schema(description = "ID de la Venta asociada al Comprobante", required = true, example = "1")
     @OneToOne
@@ -35,11 +35,11 @@ public class Comprobante {
         
     }
 
-    public Comprobante getIdComprobante() {
+    public Long getIdComprobante() {
         return idComprobante;
     }
 
-    public void setIdComprobante(Comprobante comprobante) {
+    public void setIdComprobante(Long comprobante) {
         this.idComprobante = comprobante;
     }
 
